@@ -1,13 +1,14 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button"
+import { REST_API_KEY, REDIRECT_URI } from "@/secret.json"
+
 
 export interface LoginPageProps {
 }
 
 const LoginPage = (props: LoginPageProps) => {
-    const REST_API_KEY = '83737e699fa7fe760ecf8b866a016030';
-    const REDIRECT_URI = 'http://localhost:3000/auth';
+    
     const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
     const loginHandler = () => {
         alert(link)
