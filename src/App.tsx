@@ -4,6 +4,7 @@ import BoardPage from '@/pages/BoardPage'
 import LoginPage from '@/pages/LoginPage';
 import ViewPage from '@/pages/ViewPage';
 import EditPage from '@/pages/EditPage';
+import AuthPage from '@/pages/AuthPage';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path='/login' element={<LoginPage/>}/>
         <Route path='/view' element={<ViewPage/>} />
         <Route path='/edit' element={<EditPage/>} />
+        <Route path='/auth' element={<AuthPage/>} />
       </Routes>
     </div>
   );
