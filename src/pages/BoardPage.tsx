@@ -1,8 +1,5 @@
 
 import { Board } from '@/components/common/Board';
-import { BoardPagination } from '@/components/common/BoardPagination';
-import { Button } from '@/components/ui/button';
-import React from 'react';
 
 export interface BoardPageProps {
     
