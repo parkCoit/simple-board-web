@@ -11,7 +11,7 @@ interface LoginRequest {
 }
 
 interface CustomJwtPayload extends JwtPayload {
-    id?: string;  // 'id' 필드가 선택적으로 존재할 수 있음을 명시
+    id?: string;  
 }
 
 const AuthPage = (props: AuthPageProps) => {
@@ -23,16 +23,13 @@ const AuthPage = (props: AuthPageProps) => {
         const getData = async (data: LoginRequest) => {
             try {
                 const response = await kakaoLoginData(data);
-                console.log('then 이에요 ')
                 const resData = JSON.stringify(response.data)
                 sessionStorage.setItem('token', resData)
-                alert(JSON.stringify(resData))
-                console.log(resData)
-
                 const decodedToken = jwtDecode<CustomJwtPayload>(resData)
                 console.log(decodedToken['id'])
+                alert(JSON.stringify(decodedToken))
                 navigate('/')
-            } catch (err: any) {  // Error 타입이 아닌 경우를 위해 any 사용을 추천하지 않지만, API 에러가 다양한 경우에 유연성을 제공
+            } catch (err: any) {  
                 console.error('catch 에요 ', err)
                 alert(err.message || 'An error occurred')
             }
