@@ -28,128 +28,129 @@ import {
 import { BoardPagination } from "@/components/common/BoardPagination"
 
 import { useNavigate } from "react-router-dom"
+import { boardData } from "@/api"
 
-const data: Payment[] = [
-  {
-    id: "m5gr84i9",
-    time: 316,
-    email: "success",
-    title: "ken99@yahoo.com",
-  },
-  {
-    id: "3u1reuv4",
-    time: 242,
-    email: "success",
-    title: "Abe45@gmail.com",
-  },
-  {
-    id: "derv1ws0",
-    time: 837,
-    email: "processing",
-    title: "Monserrat44@gmail.com",
-  },
-  {
-    id: "5kma53ae",
-    time: 874,
-    email: "success",
-    title: "Silas22@gmail.com",
-  },
-  {
-    id: "bhqecj4p",
-    time: 721,
-    email: "failed",
-    title: "carmella@hotmail.com",
-  },
-  {
-    id: "derv1ws0",
-    time: 837,
-    email: "processing",
-    title: "Monserrat44@gmail.com",
-  },
-  {
-    id: "m5gr84i9",
-    time: 316,
-    email: "success",
-    title: "ken99@yahoo.com",
-  },
-  {
-    id: "3u1reuv4",
-    time: 242,
-    email: "success",
-    title: "Abe45@gmail.com",
-  },
-  {
-    id: "derv1ws0",
-    time: 837,
-    email: "processing",
-    title: "Monserrat44@gmail.com",
-  },
-  {
-    id: "5kma53ae",
-    time: 874,
-    email: "success",
-    title: "Silas22@gmail.com",
-  },
-  {
-    id: "bhqecj4p",
-    time: 721,
-    email: "failed",
-    title: "carmella@hotmail.com",
-  },
-  {
-    id: "derv1ws0",
-    time: 837,
-    email: "processing",
-    title: "Monserrat44@gmail.com",
-  },
-  {
-    id: "m5gr84i9",
-    time: 316,
-    email: "success",
-    title: "ken99@yahoo.com",
-  },
-  {
-    id: "3u1reuv4",
-    time: 242,
-    email: "success",
-    title: "Abe45@gmail.com",
-  },
-  {
-    id: "derv1ws0",
-    time: 837,
-    email: "processing",
-    title: "Monserrat44@gmail.com",
-  },
-  {
-    id: "5kma53ae",
-    time: 874,
-    email: "success",
-    title: "Silas22@gmail.com",
-  },
-  {
-    id: "bhqecj4p",
-    time: 721,
-    email: "failed",
-    title: "carmella@hotmail.com",
-  },
-  {
-    id: "derv1ws0",
-    time: 837,
-    email: "processing",
-    title: "Monserrat44@gmail.com",
-  },
-]
+// const data: Payment[] = [
+//   {
+//     id: "m5gr84i9",
+//     time: 316,
+//     author_id: "success",
+//     title: "ken99@yahoo.com",
+//   },
+//   {
+//     id: "3u1reuv4",
+//     time: 242,
+//     author_id: "success",
+//     title: "Abe45@gmail.com",
+//   },
+//   {
+//     id: "derv1ws0",
+//     time: 837,
+//     author_id: "processing",
+//     title: "Monserrat44@gmail.com",
+//   },
+//   {
+//     id: "5kma53ae",
+//     time: 874,
+//     author_id: "success",
+//     title: "Silas22@gmail.com",
+//   },
+//   {
+//     id: "bhqecj4p",
+//     time: 721,
+//     author_id: "failed",
+//     title: "carmella@hotmail.com",
+//   },
+//   {
+//     id: "derv1ws0",
+//     time: 837,
+//     author_id: "processing",
+//     title: "Monserrat44@gmail.com",
+//   },
+//   {
+//     id: "m5gr84i9",
+//     time: 316,
+//     author_id: "success",
+//     title: "ken99@yahoo.com",
+//   },
+//   {
+//     id: "3u1reuv4",
+//     time: 242,
+//     author_id: "success",
+//     title: "Abe45@gmail.com",
+//   },
+//   {
+//     id: "derv1ws0",
+//     time: 837,
+//     author_id: "processing",
+//     title: "Monserrat44@gmail.com",
+//   },
+//   {
+//     id: "5kma53ae",
+//     time: 874,
+//     author_id: "success",
+//     title: "Silas22@gmail.com",
+//   },
+//   {
+//     id: "bhqecj4p",
+//     time: 721,
+//     author_id: "failed",
+//     title: "carmella@hotmail.com",
+//   },
+//   {
+//     id: "derv1ws0",
+//     time: 837,
+//     author_id: "processing",
+//     title: "Monserrat44@gmail.com",
+//   },
+//   {
+//     id: "m5gr84i9",
+//     time: 316,
+//     author_id: "success",
+//     title: "ken99@yahoo.com",
+//   },
+//   {
+//     id: "3u1reuv4",
+//     time: 242,
+//     author_id: "success",
+//     title: "Abe45@gmail.com",
+//   },
+//   {
+//     id: "derv1ws0",
+//     time: 837,
+//     author_id: "processing",
+//     title: "Monserrat44@gmail.com",
+//   },
+//   {
+//     id: "5kma53ae",
+//     time: 874,
+//     author_id: "success",
+//     title: "Silas22@gmail.com",
+//   },
+//   {
+//     id: "bhqecj4p",
+//     time: 721,
+//     author_id: "failed",
+//     title: "carmella@hotmail.com",
+//   },
+//   {
+//     id: "derv1ws0",
+//     time: 837,
+//     author_id: "processing",
+//     title: "Monserrat44@gmail.com",
+//   },
+// ]
 
 export type Payment = {
-  id: string
-  time: number
-  email: string
+  custom_id: string
+  time: { date: string; time: string }; 
+  author_id: string
   title: string
 }
 
 export const columns: ColumnDef<Payment>[] = [
   {
-    accessorKey: "email",
+    accessorKey: "author_id",
     header: ({ column }) => {
         return (
           <Button className="px-0"
@@ -162,7 +163,7 @@ export const columns: ColumnDef<Payment>[] = [
         )
       },
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("email")}</div>
+      <div className="capitalize">{row.getValue("author_id")}</div>
     ),
   },
   {
@@ -174,20 +175,16 @@ export const columns: ColumnDef<Payment>[] = [
     accessorKey: "time",
     header: () => <div className="text-right">time</div>,
     cell: ({ row }) => {
-      const time = parseFloat(row.getValue("time"))
+        const timeData = row.getValue<{ date: string; time: string }>("time");
 
+        return <div className="text-right">{`${timeData.date} ${timeData.time}`}</div>;
 
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(time)
-
-      return <div className="text-right font-medium">{formatted}</div>
     },
   }
 ]
 
 export function Board() {
+  const [data, setData] = React.useState<Payment[]>([]);
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -197,6 +194,18 @@ export function Board() {
   const [rowSelection, setRowSelection] = React.useState({})
 
   const navigate = useNavigate()
+
+  React.useEffect(() => {
+    boardData()
+    .then((res) => {
+        let resData = [...res.data].reverse()
+        setData(resData)
+    })
+    .catch((err) => {
+        alert(err)
+    })
+   
+}, []); 
 
   const table = useReactTable({
     data,
@@ -256,8 +265,9 @@ export function Board() {
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
+                onClick={() => {navigate(`/view/${row.original.custom_id}`)}}
+                key={row.id}
+                data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
