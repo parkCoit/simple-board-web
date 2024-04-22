@@ -12,8 +12,8 @@ function App() {
       <Routes>
         <Route path='/' element={<BoardPage/>} />
         <Route path='/login' element={<LoginPage/>}/>
-        <Route path='/view' element={<ViewPage/>} />
-        <Route path='/edit' element={<EditPage/>} />
+        <Route path='/view/:id' element={<ViewPage/>} />
+        <Route path='/edit/:id?' element={<EditPage/>} />
         <Route path='/auth' element={<AuthPage/>} />
       </Routes>
     </div>
