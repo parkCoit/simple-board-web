@@ -1,8 +1,6 @@
 
-import React from 'react';
-import { Button } from "@/components/ui/button"
 
-import secrets from "@/secret.json";
+import { Login } from '@/components/common/Login';
 
 
 export interface LoginPageProps {
@@ -10,17 +8,11 @@ export interface LoginPageProps {
 }
 
 const LoginPage = (props: LoginPageProps) => {
-    const { REST_API_KEY, REDIRECT_URI } = secrets;
-    const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-    const loginHandler = () => {
-        window.location.href = link;
-    };
 
-    return <div>
-        <Button type='button' onClick={loginHandler}>
-            카카오 로그인
-        </Button>
-    </div>;
+    return(
+    <div className='p-4'>
+        <Login/>
+    </div>)
 };
 
 export default LoginPage;
