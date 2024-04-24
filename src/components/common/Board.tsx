@@ -30,122 +30,12 @@ import { BoardPagination } from "@/components/common/BoardPagination"
 import { useNavigate } from "react-router-dom"
 import { boardData } from "@/api"
 
-// const data: Payment[] = [
-//   {
-//     id: "m5gr84i9",
-//     time: 316,
-//     author_id: "success",
-//     title: "ken99@yahoo.com",
-//   },
-//   {
-//     id: "3u1reuv4",
-//     time: 242,
-//     author_id: "success",
-//     title: "Abe45@gmail.com",
-//   },
-//   {
-//     id: "derv1ws0",
-//     time: 837,
-//     author_id: "processing",
-//     title: "Monserrat44@gmail.com",
-//   },
-//   {
-//     id: "5kma53ae",
-//     time: 874,
-//     author_id: "success",
-//     title: "Silas22@gmail.com",
-//   },
-//   {
-//     id: "bhqecj4p",
-//     time: 721,
-//     author_id: "failed",
-//     title: "carmella@hotmail.com",
-//   },
-//   {
-//     id: "derv1ws0",
-//     time: 837,
-//     author_id: "processing",
-//     title: "Monserrat44@gmail.com",
-//   },
-//   {
-//     id: "m5gr84i9",
-//     time: 316,
-//     author_id: "success",
-//     title: "ken99@yahoo.com",
-//   },
-//   {
-//     id: "3u1reuv4",
-//     time: 242,
-//     author_id: "success",
-//     title: "Abe45@gmail.com",
-//   },
-//   {
-//     id: "derv1ws0",
-//     time: 837,
-//     author_id: "processing",
-//     title: "Monserrat44@gmail.com",
-//   },
-//   {
-//     id: "5kma53ae",
-//     time: 874,
-//     author_id: "success",
-//     title: "Silas22@gmail.com",
-//   },
-//   {
-//     id: "bhqecj4p",
-//     time: 721,
-//     author_id: "failed",
-//     title: "carmella@hotmail.com",
-//   },
-//   {
-//     id: "derv1ws0",
-//     time: 837,
-//     author_id: "processing",
-//     title: "Monserrat44@gmail.com",
-//   },
-//   {
-//     id: "m5gr84i9",
-//     time: 316,
-//     author_id: "success",
-//     title: "ken99@yahoo.com",
-//   },
-//   {
-//     id: "3u1reuv4",
-//     time: 242,
-//     author_id: "success",
-//     title: "Abe45@gmail.com",
-//   },
-//   {
-//     id: "derv1ws0",
-//     time: 837,
-//     author_id: "processing",
-//     title: "Monserrat44@gmail.com",
-//   },
-//   {
-//     id: "5kma53ae",
-//     time: 874,
-//     author_id: "success",
-//     title: "Silas22@gmail.com",
-//   },
-//   {
-//     id: "bhqecj4p",
-//     time: 721,
-//     author_id: "failed",
-//     title: "carmella@hotmail.com",
-//   },
-//   {
-//     id: "derv1ws0",
-//     time: 837,
-//     author_id: "processing",
-//     title: "Monserrat44@gmail.com",
-//   },
-// ]
 
 export type Payment = {
-  custom_id: string
-  time: { date: string; time: string }; 
-  author_id: string
-  title: string
+  custom_id: string;
+  time: string; 
+  author_id: string;
+  title: string;
 }
 
 export const columns: ColumnDef<Payment>[] = [
@@ -175,9 +65,11 @@ export const columns: ColumnDef<Payment>[] = [
     accessorKey: "time",
     header: () => <div className="text-right">time</div>,
     cell: ({ row }) => {
-        const timeData = row.getValue<{ date: string; time: string }>("time");
+        
 
-        return <div className="text-right">{`${timeData.date} ${timeData.time}`}</div>;
+        return <div className="text-right">
+            {row.getValue("time")}
+            </div>;
 
     },
   }
@@ -205,7 +97,13 @@ export function Board() {
         alert(err)
     })
    
-}, []); 
+  }, []); 
+
+  const handleSearch = () => {
+    navigate('./edit');
+  };
+
+  
 
   const table = useReactTable({
     data,
@@ -238,7 +136,7 @@ export function Board() {
           className="max-w-sm"
         />
 
-        <Button className="ml-auto" onClick={() => {navigate('./edit')}}>글쓰기</Button>
+        <Button className="ml-auto" onClick={handleSearch}>글쓰기</Button>
 
       </div>
       <div className="rounded-md border">
