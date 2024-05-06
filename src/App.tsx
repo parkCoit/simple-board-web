@@ -5,10 +5,12 @@ import LoginPage from '@/pages/LoginPage';
 import ViewPage from '@/pages/ViewPage';
 import EditPage from '@/pages/EditPage';
 import AuthPage from '@/pages/AuthPage';
+import TopNavigation from '@/components/common/TopNavigation';
 
 function App() {
   return (
     <div className="App">
+      <TopNavigation/>
       <Routes>
         <Route path='/' element={<BoardPage/>} />
         <Route path='/login' element={<LoginPage/>}/>
