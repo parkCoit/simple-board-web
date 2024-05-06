@@ -1,4 +1,5 @@
 
+import View  from '@/components/common/View';
 import React from 'react';
 
 export interface ViewPageProps {
@@ -6,7 +7,7 @@ export interface ViewPageProps {
 }
 
 const ViewPage = (props: ViewPageProps) => {
-    return <div>ViewPage</div>;
+    return <div> <View/> </div>;
 };
 
 export default ViewPage;
