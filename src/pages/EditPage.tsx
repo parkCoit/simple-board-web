@@ -1,6 +1,6 @@
 
 
-import { Edit } from '@/components/common/Edit';
+import Edit  from '@/components/common/Edit';
 import React from 'react';
 
 export interface EditPageProps {
