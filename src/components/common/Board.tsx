@@ -87,7 +87,9 @@ export function Board() {
 
   const navigate = useNavigate()
 
+
   React.useEffect(() => {
+    
     boardData()
     .then((res) => {
         let resData = [...res.data].reverse()
