@@ -1,5 +1,5 @@
 
-import { Auth } from "@/components/common/Auth";
+import { Auth }  from "@/components/common/Auth";
 
 export interface AuthPageProps {
     
