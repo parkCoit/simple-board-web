@@ -1,5 +1,5 @@
 
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import BoardPage from '@/pages/BoardPage'
 import LoginPage from '@/pages/LoginPage';
 import ViewPage from '@/pages/ViewPage';
@@ -8,9 +8,14 @@ import AuthPage from '@/pages/AuthPage';
 import TopNavigation from '@/components/common/TopNavigation';
 
 function App() {
+  
+  const location = useLocation(); 
+
+  const showTopNav = location.pathname !== '/login';
+
   return (
     <div className="App">
-      <TopNavigation/>
+      {showTopNav && <TopNavigation/>}
       <Routes>
         <Route path='/' element={<BoardPage/>} />
         <Route path='/login' element={<LoginPage/>}/>
