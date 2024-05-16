@@ -33,27 +33,28 @@ import { boardData } from "@/api"
 
 export type Payment = {
   custom_id: string;
-  time: string; 
+  time: string;
   author_id: string;
+  author_nickname: string;
   title: string;
 }
 
 export const columns: ColumnDef<Payment>[] = [
   {
-    accessorKey: "author_id",
+    accessorKey: "author_nickname",
     header: ({ column }) => {
         return (
           <Button className="px-0"
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            email
+            닉네임
             <ArrowUpDown className="ml-2 h-4 w-4" />
           </Button>
         )
       },
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("author_id")}</div>
+      <div>{row.getValue("author_nickname")}</div>
     ),
   },
   {
@@ -65,11 +66,9 @@ export const columns: ColumnDef<Payment>[] = [
     accessorKey: "time",
     header: () => <div className="text-right">time</div>,
     cell: ({ row }) => {
-        
+        const timeData = row.getValue<{ date: string; time: string }>("time");
 
-        return <div className="text-right">
-            {row.getValue("time")}
-            </div>;
+        return <div className="text-right">{`${timeData}`}</div>;
 
     },
   }
@@ -87,9 +86,7 @@ export function Board() {
 
   const navigate = useNavigate()
 
-
   React.useEffect(() => {
-    
     boardData()
     .then((res) => {
         let resData = [...res.data].reverse()
@@ -99,13 +96,7 @@ export function Board() {
         alert(err)
     })
    
-  }, []); 
-
-  const handleSearch = () => {
-    navigate('./edit');
-  };
-
-  
+}, []); 
 
   const table = useReactTable({
     data,
@@ -138,7 +129,7 @@ export function Board() {
           className="max-w-sm"
         />
 
-        <Button className="ml-auto" onClick={handleSearch}>글쓰기</Button>
+        <Button className="ml-auto" onClick={() => {navigate('./edit')}}>글쓰기</Button>
 
       </div>
       <div className="rounded-md border">
