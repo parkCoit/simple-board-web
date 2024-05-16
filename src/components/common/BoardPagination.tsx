@@ -3,18 +3,36 @@ import {
     ChevronRightIcon,
     DoubleArrowLeftIcon,
     DoubleArrowRightIcon,
-  } from "@radix-ui/react-icons"
-  import { Table } from "@tanstack/react-table"
+  } from "@radix-ui/react-icons";
+  import { Table } from "@tanstack/react-table";
+  import { useEffect } from "react";
+  import { useNavigate, useLocation } from 'react-router-dom';
   
-  import { Button } from "@/components/ui/button"
+  import { Button } from "@/components/ui/button";
   
   interface BoardPaginationProps<TData> {
-    table: Table<TData>
+    table: Table<TData>;
   }
   
-  export function BoardPagination<TData>({
-    table,
-  }: BoardPaginationProps<TData>) {
+  export function BoardPagination<TData>({ table }: BoardPaginationProps<TData>) {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const pageParam = queryParams.get('page');
+    const currentPage = pageParam ? Number(pageParam) - 1 : 0;
+  
+    useEffect(() => {
+      table.setPageIndex(currentPage);
+    }, [currentPage, table]);
+  
+    const handlePageChange = (pageIndex: number) => {
+      queryParams.set('page', (pageIndex + 1).toString());
+      navigate({
+        pathname: location.pathname,
+        search: queryParams.toString(),
+      });
+    };
+  
     return (
       <div className="flex items-center justify-between px-2">
         <div className="flex-1 text-sm text-muted-foreground">
@@ -22,7 +40,6 @@ import {
           {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>
         <div className="flex items-center space-x-6 lg:space-x-8">
-          
           <div className="flex w-[100px] items-center justify-center text-sm font-medium">
             Page {table.getState().pagination.pageIndex + 1} of{" "}
             {table.getPageCount()}
@@ -31,7 +48,7 @@ import {
             <Button
               variant="outline"
               className="hidden h-8 w-8 p-0 lg:flex"
-              onClick={() => table.setPageIndex(0)}
+              onClick={() => handlePageChange(0)}
               disabled={!table.getCanPreviousPage()}
             >
               <span className="sr-only">Go to first page</span>
@@ -40,7 +57,7 @@ import {
             <Button
               variant="outline"
               className="h-8 w-8 p-0"
-              onClick={() => table.previousPage()}
+              onClick={() => handlePageChange(table.getState().pagination.pageIndex - 1)}
               disabled={!table.getCanPreviousPage()}
             >
               <span className="sr-only">Go to previous page</span>
@@ -49,7 +66,7 @@ import {
             <Button
               variant="outline"
               className="h-8 w-8 p-0"
-              onClick={() => table.nextPage()}
+              onClick={() => handlePageChange(table.getState().pagination.pageIndex + 1)}
               disabled={!table.getCanNextPage()}
             >
               <span className="sr-only">Go to next page</span>
@@ -58,7 +75,7 @@ import {
             <Button
               variant="outline"
               className="hidden h-8 w-8 p-0 lg:flex"
-              onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+              onClick={() => handlePageChange(table.getPageCount() - 1)}
               disabled={!table.getCanNextPage()}
             >
               <span className="sr-only">Go to last page</span>
@@ -67,5 +84,5 @@ import {
           </div>
         </div>
       </div>
-    )
+    );
   }
