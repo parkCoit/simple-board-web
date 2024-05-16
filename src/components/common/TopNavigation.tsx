@@ -29,10 +29,11 @@ export default function TopNavigation() {
 
     return(
         <div className="flex w-full border-b-2 p-4">
+            <h1 className='text-3xl cursor-pointer' onClick={() => {navigate('/')}}>게시판</h1>
             {token ? (
-            <Button onClick={handleLogout}> 로그아웃 </Button>
+            <Button className='ml-auto' onClick={handleLogout}> 로그아웃 </Button>
           ) : (
-            <Button onClick={handleLogin}> 로그인 </Button>
+            <Button className='ml-auto' onClick={handleLogin}> 로그인 </Button>
           )
           }
         </div>
