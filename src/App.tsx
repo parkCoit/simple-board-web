@@ -10,8 +10,10 @@ import TopNavigation from '@/components/common/TopNavigation';
 function App() {
   
   const location = useLocation(); 
+  
+  const hideTopNavPaths = ['/login', '/auth'];
 
-  const showTopNav = location.pathname !== '/login';
+  const showTopNav = !hideTopNavPaths.includes(location.pathname);
 
   return (
     <div className="App">
