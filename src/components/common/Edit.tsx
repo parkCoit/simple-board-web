@@ -68,7 +68,7 @@ export default function Edit() {
             const decodedToken: any = jwtDecode(token);
             addBoard({ 'title': title, 'content': content, 'author': decodedToken.id })
                 .then(res => {
-                    alert('게시글이 작성되었습니다!');
+                    alert(res.data.data);
                     navigate(`/`);
                 })
                 .catch(err => {
