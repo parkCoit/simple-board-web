@@ -1,5 +1,4 @@
-
-import * as React from "react"
+import * as React from "react";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -11,12 +10,11 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-} from "@tanstack/react-table"
-import { ArrowUpDown } from "lucide-react"
+} from "@tanstack/react-table";
+import { ArrowUpDown } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-
-import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -24,37 +22,38 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { BoardPagination } from "@/components/common/BoardPagination"
+} from "@/components/ui/table";
+import { BoardPagination } from "@/components/common/BoardPagination";
 
-import { useNavigate } from "react-router-dom"
-import { boardData } from "@/api"
-
+import { useNavigate, useLocation } from "react-router-dom";
+import { boardData } from "@/api";
 
 export type Payment = {
   custom_id: string;
   time: string;
   author_id: string;
-  author_nickname: string;
   title: string;
-}
+};
 
 export const columns: ColumnDef<Payment>[] = [
   {
-    accessorKey: "author_nickname",
+    accessorKey: "author_id",
     header: ({ column }) => {
-        return (
-          <Button className="px-0"
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            닉네임
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
-        )
-      },
+      return (
+        <Button
+          className="px-0"
+          variant="ghost"
+          onClick={() =>
+            column.toggleSorting(column.getIsSorted() === "asc")
+          }
+        >
+          email
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => (
-      <div>{row.getValue("author_nickname")}</div>
+      <div className="capitalize">{row.getValue("author_id")}</div>
     ),
   },
   {
@@ -66,37 +65,45 @@ export const columns: ColumnDef<Payment>[] = [
     accessorKey: "time",
     header: () => <div className="text-right">time</div>,
     cell: ({ row }) => {
-        const timeData = row.getValue<{ date: string; time: string }>("time");
-
-        return <div className="text-right">{`${timeData}`}</div>;
-
+      return <div className="text-right">{row.getValue("time")}</div>;
     },
-  }
-]
+  },
+];
 
 export function Board() {
   const [data, setData] = React.useState<Payment[]>([]);
-  const [sorting, setSorting] = React.useState<SortingState>([])
+  const [totalPages, setTotalPages] = React.useState<number>(0);
+  const [currentPage, setCurrentPage] = React.useState<number>(1);
+  const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
-  )
+  );
   const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({})
-  const [rowSelection, setRowSelection] = React.useState({})
+    React.useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = React.useState({});
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const location = useLocation();
+  const queryParams: any = new URLSearchParams(location.search);
+  const pageParam = parseInt(queryParams.get("page")) || 1;
 
   React.useEffect(() => {
-    boardData()
-    .then((res) => {
-        let resData = [...res.data].reverse()
-        setData(resData)
-    })
-    .catch((err) => {
-        alert(err)
-    })
-   
-}, []); 
+    setCurrentPage(pageParam);
+
+    boardData({ page: pageParam })
+      .then((res) => {
+        setData(res.data.data);
+        console.log(res.data);
+        setTotalPages(res.data.total_pages);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }, [pageParam]);
+
+  const handleSearch = () => {
+    navigate("./edit");
+  };
 
   const table = useReactTable({
     data,
@@ -115,7 +122,7 @@ export function Board() {
       columnVisibility,
       rowSelection,
     },
-  })
+  });
 
   return (
     <div className="w-full">
@@ -128,9 +135,9 @@ export function Board() {
           }
           className="max-w-sm"
         />
-
-        <Button className="ml-auto" onClick={() => {navigate('./edit')}}>글쓰기</Button>
-
+        <Button className="ml-auto" onClick={handleSearch}>
+          글쓰기
+        </Button>
       </div>
       <div className="rounded-md border">
         <Table>
@@ -147,7 +154,7 @@ export function Board() {
                             header.getContext()
                           )}
                     </TableHead>
-                  )
+                  );
                 })}
               </TableRow>
             ))}
@@ -156,26 +163,22 @@ export function Board() {
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
-                onClick={() => {navigate(`/view/${row.original.custom_id}`)}}
-                key={row.id}
-                data-state={row.getIsSelected() && "selected"}
+                  onClick={() => {
+                    navigate(`/view/${row.original.custom_id}`);
+                  }}
+                  key={row.id}
+                  data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
+                <TableCell colSpan={columns.length} className="h-24 text-center">
                   No results.
                 </TableCell>
               </TableRow>
@@ -184,8 +187,12 @@ export function Board() {
         </Table>
       </div>
       <div className="mt-4">
-        <BoardPagination table={table}/>
+        <BoardPagination
+          table={table}
+          totalPages={totalPages}
+          currentPage={currentPage}
+        />
       </div>
     </div>
-  )
+  );
 }
