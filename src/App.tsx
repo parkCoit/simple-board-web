@@ -6,6 +6,7 @@ import ViewPage from '@/pages/ViewPage';
 import EditPage from '@/pages/EditPage';
 import AuthPage from '@/pages/AuthPage';
 import TopNavigation from '@/components/common/TopNavigation';
+import NotFoundPage from '@/pages/NotFoundPage';
 
 function App() {
   
@@ -24,6 +25,7 @@ function App() {
         <Route path='/view/:id' element={<ViewPage/>} />
         <Route path='/edit/:id?' element={<EditPage/>} />
         <Route path='/auth' element={<AuthPage/>} />
+        <Route path='*' element={<NotFoundPage/>}/>
       </Routes>
     </div>
   );
