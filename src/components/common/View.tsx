@@ -17,7 +17,10 @@ import {
 interface BoardDetails {
   title: string;
   content: string;
-  author: string;
+  author: {
+    id : string;
+    nickname : string;
+  }
   time?: string;
   modification_time: string;
 }
@@ -87,7 +90,12 @@ const handleList = () => {
       
       <div className="h-full flex-col md:flex">
         <div className="container flex flex-col items-start justify-between space-y-2 py-4 sm:flex-row sm:items-center sm:space-y-0 md:h-16">
-          <h2 className="text-lg font-semibold"> {boardDetail?.title} </h2>
+          <div>
+            <h2 className="text-2xl font-semibold"> {boardDetail?.title} </h2>
+            <p className="text-xs">
+              {boardDetail?.author.nickname}({boardDetail?.author.id})
+            </p>
+          </div>
           <p> 수정시간 : {boardDetail?.modification_time} </p>
         </div>
         <Separator />
