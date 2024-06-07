@@ -33,6 +33,7 @@ export type Payment = {
   time: string;
   author_id: string;
   title: string;
+  author_nickname : string;
 };
 
 export const columns: ColumnDef<Payment>[] = [
@@ -47,23 +48,25 @@ export const columns: ColumnDef<Payment>[] = [
             column.toggleSorting(column.getIsSorted() === "asc")
           }
         >
-          email
+          닉네임(이메일)
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("author_id")}</div>
+      <div>
+        {row.original.author_nickname}({row.getValue("author_id")})
+      </div>
     ),
   },
   {
     accessorKey: "title",
-    header: "title",
+    header: "제목",
     cell: ({ row }) => <div className="lowercase">{row.getValue("title")}</div>,
   },
   {
     accessorKey: "time",
-    header: () => <div className="text-right">time</div>,
+    header: () => <div className="text-right">작성 시간</div>,
     cell: ({ row }) => {
       return <div className="text-right">{row.getValue("time")}</div>;
     },
@@ -93,8 +96,8 @@ export function Board() {
     boardData({ page: pageParam })
       .then((res) => {
         setData(res.data.data);
-        console.log(res.data);
         setTotalPages(res.data.total_pages);
+        console.log(res.data.data);
       })
       .catch((err) => {
         alert(err);
@@ -123,6 +126,27 @@ export function Board() {
       rowSelection,
     },
   });
+
+//   if (pageParam > totalPages) {
+//     return (
+//       <div className="w-full flex flex-col items-center justify-center py-10">
+//         <h2 className="text-lg font-semibold">페이지가 없습니다.</h2>
+//         <Button variant="secondary" onClick={() => navigate(`/?page=1`)}>
+//           첫 페이지로 이동
+//         </Button>
+//       </div>
+//     );
+//   }
+//   if (pageParam > totalPages && totalPages !== 0) {
+//     return (
+//       <div className="w-full flex flex-col items-center justify-center py-10">
+//         <h2 className="text-lg font-semibold">페이지가 없습니다.</h2>
+//         <Button variant="secondary" onClick={() => navigate(`/?page=1`)}>
+//           첫 페이지로 이동
+//         </Button>
+//       </div>
+//     );
+//   }
 
   return (
     <div className="w-full">
