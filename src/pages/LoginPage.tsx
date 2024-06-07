@@ -1,6 +1,6 @@
 
 
-import { Login } from '@/components/common/Login';
+import Login  from '@/components/common/Login';
 
 
 export interface LoginPageProps {
