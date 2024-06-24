@@ -20,7 +20,7 @@ export default function Edit() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
-  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [isAuthorized, setIsAuthorized] = useState(true);
 
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -28,16 +28,20 @@ export default function Edit() {
   useEffect(() => {
     if (id) {
       boardData({ customId: id })
-        .then(res => {
+        .then((res) => {
           setTitle(res.data.title);
           setContent(res.data.content);
           const token = sessionStorage.getItem("token");
           if (token) {
             const decoded: DecodedToken = jwtDecode<DecodedToken>(token);
-            setIsAuthorized(decoded.email === res.data.author.email);
+            if (decoded.email !== res.data.author.email) {
+              setIsAuthorized(false);
+            }
+          } else {
+            setIsAuthorized(false);
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.error("게시물 로딩 실패:", err);
         });
     }
@@ -57,7 +61,7 @@ export default function Edit() {
           alert("수정 완료!");
           navigate(`/`);
         })
-        .catch(err => {
+        .catch((err) => {
           console.error(err);
         });
     } else {
@@ -69,11 +73,11 @@ export default function Edit() {
 
       const decodedToken: DecodedToken = jwtDecode<DecodedToken>(token);
       addBoard({ title, content, author: decodedToken.id })
-        .then(res => {
+        .then((res) => {
           alert(res.data.data);
           navigate(`/`);
         })
-        .catch(err => {
+        .catch((err) => {
           console.error(err);
         });
     }
@@ -120,7 +124,7 @@ export default function Edit() {
                         type="text"
                         className="bg-white"
                         value={title}
-                        onChange={e => setTitle(e.target.value)}
+                        onChange={(e) => setTitle(e.target.value)}
                       />
                     </div>
                     <div className="flex h-full flex-col space-y-4">
@@ -130,14 +134,20 @@ export default function Edit() {
                         className="min-h-[400px] flex-1 p-4 md:min-h-[700px] lg:min-h-[700px]"
                         id="content"
                         value={content}
-                        onChange={e => {
+                        onChange={(e) => {
                           e.preventDefault();
                           setContent(e.target.value);
                         }}
                       />
                       <div className="flex items-center space-x-2 ml-auto">
-                        <Button type="submit">{id ? "수정하기" : "작성하기"}</Button>
-                        <Button type="button" variant="secondary" onClick={handleCancelButton}>
+                        <Button type="submit">
+                          {id ? "수정하기" : "작성하기"}
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="secondary"
+                          onClick={handleCancelButton}
+                        >
                           취소
                         </Button>
                       </div>

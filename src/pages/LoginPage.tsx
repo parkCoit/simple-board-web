@@ -1,18 +1,13 @@
+import Login from "@/components/common/Login";
 
-
-import Login  from '@/components/common/Login';
-
-
-export interface LoginPageProps {
-
-}
+export interface LoginPageProps {}
 
 const LoginPage = (props: LoginPageProps) => {
-
-    return(
-    <div className='p-4'>
-        <Login/>
-    </div>)
+  return (
+    <div className="p-4">
+      <Login />
+    </div>
+  );
 };
 
 export default LoginPage;

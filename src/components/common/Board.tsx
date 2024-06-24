@@ -27,13 +27,14 @@ import { BoardPagination } from "@/components/common/BoardPagination";
 
 import { useNavigate, useLocation } from "react-router-dom";
 import { boardData } from "@/api";
+import NotFoundPage from "@/pages/NotFoundPage";
 
 export type Payment = {
   custom_id: string;
   time: string;
   author_id: string;
   title: string;
-  author_nickname : string;
+  author_nickname: string;
 };
 
 export const columns: ColumnDef<Payment>[] = [
@@ -44,9 +45,7 @@ export const columns: ColumnDef<Payment>[] = [
         <Button
           className="px-0"
           variant="ghost"
-          onClick={() =>
-            column.toggleSorting(column.getIsSorted() === "asc")
-          }
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           닉네임(이메일)
           <ArrowUpDown className="ml-2 h-4 w-4" />
@@ -74,7 +73,7 @@ export const columns: ColumnDef<Payment>[] = [
 ];
 
 export function Board() {
-  const [data, setData] = React.useState<Payment[]>([]);
+  const [apiData, setApiData] = React.useState<Payment[]>([]);
   const [totalPages, setTotalPages] = React.useState<number>(0);
   const [currentPage, setCurrentPage] = React.useState<number>(1);
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -84,32 +83,50 @@ export function Board() {
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
+  const [notFound, setNotFound] = React.useState(false);
+  const [filterValue, setFilterValue] = React.useState("");
 
   const navigate = useNavigate();
   const location = useLocation();
   const queryParams: any = new URLSearchParams(location.search);
   const pageParam = parseInt(queryParams.get("page")) || 1;
+  const contentParam = queryParams.get("title");
 
   React.useEffect(() => {
     setCurrentPage(pageParam);
 
-    boardData({ page: pageParam })
+    boardData({ page: pageParam, content: contentParam })
       .then((res) => {
-        setData(res.data.data);
-        setTotalPages(res.data.total_pages);
-        console.log(res.data.data);
+        if (res.data.error === "Page not found") {
+          setNotFound(true);
+        } else {
+          setApiData(res.data.data);
+          setTotalPages(res.data.total_pages);
+        }
       })
       .catch((err) => {
         alert(err);
       });
-  }, [pageParam]);
+  }, [pageParam, contentParam]);
 
   const handleSearch = () => {
     navigate("./edit");
   };
 
+  const handleKeyDown = (event: any) => {
+    if (event.key === "Enter") {
+      const filterValue = event.target.value.trim();
+      const nextPageUrl = `/search?page=1&title=${filterValue}`;
+      window.location.href = nextPageUrl;
+    }
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFilterValue(event.target.value);
+  };
+
   const table = useReactTable({
-    data,
+    data: apiData,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -127,36 +144,20 @@ export function Board() {
     },
   });
 
-//   if (pageParam > totalPages) {
-//     return (
-//       <div className="w-full flex flex-col items-center justify-center py-10">
-//         <h2 className="text-lg font-semibold">페이지가 없습니다.</h2>
-//         <Button variant="secondary" onClick={() => navigate(`/?page=1`)}>
-//           첫 페이지로 이동
-//         </Button>
-//       </div>
-//     );
-//   }
-//   if (pageParam > totalPages && totalPages !== 0) {
-//     return (
-//       <div className="w-full flex flex-col items-center justify-center py-10">
-//         <h2 className="text-lg font-semibold">페이지가 없습니다.</h2>
-//         <Button variant="secondary" onClick={() => navigate(`/?page=1`)}>
-//           첫 페이지로 이동
-//         </Button>
-//       </div>
-//     );
-//   }
+  React.useEffect(() => {
+    if (notFound) {
+      navigate("/error");
+    }
+  }, [notFound, navigate]);
 
   return (
     <div className="w-full">
       <div className="flex items-center py-4 ">
         <Input
-          placeholder="Filter Titles..."
-          value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("title")?.setFilterValue(event.target.value)
-          }
+          placeholder="제목으로 검색"
+          value={filterValue}
+          onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
           className="max-w-sm"
         />
         <Button className="ml-auto" onClick={handleSearch}>
@@ -195,14 +196,20 @@ export function Board() {
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
                     </TableCell>
                   ))}
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
                   No results.
                 </TableCell>
               </TableRow>

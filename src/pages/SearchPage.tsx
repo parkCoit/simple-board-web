@@ -1,13 +1,11 @@
 import { Board } from "@/components/common/Board";
 
-export interface BoardPageProps {}
-
-const BoardPage = (props: BoardPageProps) => {
+function SearchPage() {
   return (
     <div className="p-4">
       <Board />
     </div>
   );
-};
+}
 
-export default BoardPage;
+export default SearchPage;

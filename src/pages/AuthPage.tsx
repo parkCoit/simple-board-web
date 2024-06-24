@@ -1,15 +1,9 @@
+import { Auth } from "@/components/common/Auth";
 
-import { Auth }  from "@/components/common/Auth";
-
-export interface AuthPageProps {
-    
-}
+export interface AuthPageProps {}
 
 const AuthPage = (props: AuthPageProps) => {
-
-    return (
-       <Auth/>
-    );
+  return <Auth />;
 };
 
 export default AuthPage;

@@ -1,14 +1,13 @@
-
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import secrets from "@/secret.json";
 
 export default function Login() {
-    const { REST_API_KEY, REDIRECT_URI } = secrets;
-    const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-    const loginHandler = () => {
-        window.location.href = link;
-    };
+  const { REST_API_KEY, REDIRECT_URI } = secrets;
+  const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+  const loginHandler = () => {
+    window.location.href = link;
+  };
   return (
     <>
       <div className="container relative hidden h-[800px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
@@ -39,17 +38,25 @@ export default function Login() {
           <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
             <div className="flex flex-col space-y-2 text-center">
               <h1 className="text-2xl font-semibold tracking-tight">
-                카카오 로그인 및 회원가입
+                <span> 카카오 로그인 </span>
               </h1>
             </div>
             <div className={cn("grid gap-6")}>
-                <Button type='button' onClick={loginHandler}>
-                    카카오 로그인
-                </Button>
+              <Button
+                type="button"
+                onClick={loginHandler}
+                className="bg-yellow-300 text-black hover:bg-yellow-300"
+              >
+                <img
+                  src="https://sso.prod.bznav.com/_next/static/media/kakao.eb88ad1c.svg"
+                  alt="카카오 로그인"
+                />
+                <span className="ml-2"> 카카오로 시작하기 </span>
+              </Button>
             </div>
           </div>
         </div>
       </div>
     </>
-  )
+  );
 }
