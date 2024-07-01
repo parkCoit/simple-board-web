@@ -38,12 +38,13 @@ export function Auth() {
             sessionStorage.setItem("token", resData);
             const decodedToken = jwtDecode<CustomJwtPayload>(resData);
             console.log(decodedToken.id);
-            alert(JSON.stringify(decodedToken));
+            alert("로그인 완료");
             navigate("/");
           }
         } catch (err: any) {
           console.error("Error on authentication", err);
-          alert(err.message || "An error occurred");
+          alert("서버 오류");
+          navigate("/");
         }
       };
 

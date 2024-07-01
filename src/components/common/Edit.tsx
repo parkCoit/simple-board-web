@@ -68,6 +68,7 @@ export default function Edit() {
       const token = sessionStorage.getItem("token");
       if (!token) {
         alert("로그인 먼저 해주세요");
+        navigate("/login");
         return;
       }
 
@@ -130,7 +131,7 @@ export default function Edit() {
                     <div className="flex h-full flex-col space-y-4">
                       <Label htmlFor="content">내용</Label>
                       <Textarea
-                        placeholder="Write a tagline for an ice cream shop"
+                        placeholder="글을 작성해주세요."
                         className="min-h-[400px] flex-1 p-4 md:min-h-[700px] lg:min-h-[700px]"
                         id="content"
                         value={content}
