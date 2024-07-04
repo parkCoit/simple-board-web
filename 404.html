@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Redirecting...</title>
     <script type="text/javascript">
-      // Redirect to the main index.html for client-side routing
-      window.location.replace("/simple-board-web/");
+      var pathname = window.location.pathname;
+      var search = window.location.search;
+      var hash = window.location.hash;
+      var newUrl = "/simple-board-web" + pathname + search + hash;
+      window.location.replace(newUrl);
     </script>
   </head>
   <body>
