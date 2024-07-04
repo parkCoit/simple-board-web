@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   // eslint-disable-next-line no-undef
-  <BrowserRouter basename={process.env.PUBLIC_URL}>
+  <BrowserRouter basename="https://parkcoit.github.io/simple-board-web/">
     <App />
   </BrowserRouter>
 );
