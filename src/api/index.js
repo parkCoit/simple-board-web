@@ -1,18 +1,19 @@
+import secrets from "@/secret.json";
 import axios from "axios";
-const server = `http://localhost:8000`;
+const { SERVER } = secrets;
 
-export const kakaoLoginData = (req) => axios.post(`${server}/kakao/login`, req);
+export const kakaoLoginData = (req) => axios.post(`${SERVER}/kakao/login`, req);
 
-export const addBoard = (req) => axios.post(`${server}/board/`, req);
-export const boardUpdate = (req) => axios.put(`${server}/board/`, req);
+export const addBoard = (req) => axios.post(`${SERVER}/board/`, req);
+export const boardUpdate = (req) => axios.put(`${SERVER}/board/`, req);
 export const boardData = (req) => {
-  return axios.get(`${server}/board/`, {
+  return axios.get(`${SERVER}/board/`, {
     params: req,
   });
 };
 
 export const deleteBoard = (req) => {
-  return axios.delete(`${server}/board/`, {
+  return axios.delete(`${SERVER}/board/`, {
     params: req,
   });
 };
