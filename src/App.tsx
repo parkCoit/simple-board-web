@@ -22,7 +22,11 @@ function App() {
       <Routes>
         <Route path="/" element={<BoardPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/view/:id" element={<ViewPage />} />
+        <Route
+          // eslint-disable-next-line no-undef
+          path={process.env.PUBLIC_URL + "/view/:id"}
+          element={<ViewPage />}
+        />
         <Route path="/edit/:id?" element={<EditPage />} />
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/search" element={<SearchPage />} />
