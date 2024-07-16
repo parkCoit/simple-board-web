@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Redirecting...</title>
     <script type="text/javascript">
+      const url = new URL(window.location.href);
+      const path = url.pathname.replace(/\/simple-board-web\//, "/");
+      window.location.replace(`/simple-board-web/index.html#${path}`);
       //   window.location.replace("/simple-board-web/");
     </script>
   </head>
