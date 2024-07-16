@@ -8,6 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
 root.render(
   // eslint-disable-next-line no-undef
   <BrowserRouter basename={process.env.PUBLIC_URL}>

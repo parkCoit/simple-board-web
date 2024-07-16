@@ -26,8 +26,8 @@ function App() {
         <Route path="/edit/:id?" element={<EditPage />} />
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/search" element={<SearchPage />} />
-        <Route path="/error" element={<NotFoundPage />} />
-        <Route path="*" element={<Navigate to="/error" replace />} />
+        {/* <Route path="/error" element={<NotFoundPage />} /> */}
+        {/* <Route path="*" element={<Navigate to="/error" replace />} /> */}
       </Routes>
     </div>
   );
