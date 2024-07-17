@@ -5,17 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Redirecting...</title>
     <script type="text/javascript">
-      const url = new URL(window.location.href);
-      const path = url.pathname.replace(/\/simple-board-web\//, "/");
-      window.location.replace(`/simple-board-web${path}`);
-      //   window.location.replace("/simple-board-web/");
+      const redirectTo = window.location.pathname + window.location.search;
+      window.location.replace("/simple-board-web/" + redirectTo);
     </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <script src="%PUBLIC_URL%/static/js/bundle.js"></script>
-    <script src="%PUBLIC_URL%/static/js/0.chunk.js"></script>
-    <script src="%PUBLIC_URL%/static/js/main.chunk.js"></script>
   </body>
 </html>
