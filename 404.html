@@ -1,21 +1,20 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Redirecting...</title>
     <script type="text/javascript">
-      const url = new URL(window.location.href);
-      const path = url.pathname.replace(/\/simple-board-web\//, "/");
-      window.location.replace(`/simple-board-web${path}`);
-      //   window.location.replace("/simple-board-web/");
+      // 현재 경로를 포함한 전체 URL을 가져옴
+      const redirectTo = window.location.pathname + window.location.search;
+      // React 애플리케이션의 베이스 URL을 설정
+      const baseUrl = "/simple-board-web";
+      // 베이스 URL과 현재 경로를 결합하여 index.html로 리디렉션
+      window.location.replace(baseUrl + "/index.html?redirect=" + redirectTo);
     </script>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <script src="%PUBLIC_URL%/static/js/bundle.js"></script>
-    <script src="%PUBLIC_URL%/static/js/0.chunk.js"></script>
-    <script src="%PUBLIC_URL%/static/js/main.chunk.js"></script>
+    <h1>Page Not Found</h1>
+    <p>Redirecting...</p>
   </body>
-</html> -->
+</html>
