@@ -110,7 +110,7 @@ export function Board() {
   }, [pageParam, contentParam]);
 
   const handleSearch = () => {
-    navigate("./edit");
+    navigate("/edit");
   };
 
   const handleKeyDown = (event: any) => {
