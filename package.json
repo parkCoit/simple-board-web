@@ -2,7 +2,6 @@
   "name": "simple-board-web",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://parkcoit.github.io/simple-board-web",
   "dependencies": {
     "@craco/craco": "^7.1.0",
     "@radix-ui/react-checkbox": "^1.0.4",
@@ -40,8 +39,6 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
