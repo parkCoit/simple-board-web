@@ -34,9 +34,9 @@ Firebase Hosting을 통해 배포되었습니다.
    ```
 3. 필요한 패키지 설치합니다:
    ```bash
-   npm install
+   yarn install
    ```
 4. 서버실행:
    ```bash
-   npm start
+   yarn start
    ```
