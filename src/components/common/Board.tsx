@@ -116,9 +116,8 @@ export function Board() {
   const handleKeyDown = (event: any) => {
     if (event.key === "Enter") {
       const filterValue = event.target.value.trim();
-      navigate(`./search?page=1&title=${filterValue}`);
-      // const nextPageUrl = `./search?page=1&title=${filterValue}`;
-      // window.location.href = nextPageUrl;
+      const nextPageUrl = `./search?page=1&title=${filterValue}`;
+      window.location.href = nextPageUrl;
     }
   };
 
