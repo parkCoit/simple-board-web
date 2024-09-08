@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const NotFound = () => {
   const handleRedirect = () => {
-    window.location.href = "/simple-board-web";
+    window.location.href = "/";
   };
   return (
     <div className="flex justify-center items-center h-screen bg-white">
