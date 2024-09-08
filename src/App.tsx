@@ -34,7 +34,7 @@ function App() {
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/error" element={<NotFoundPage />} />
-        <Route path="*" element={<Navigate to="/error" replace />} />
+        <Route path="*" element={<Navigate to="/error" />} />
       </Routes>
     </div>
   );

@@ -1,11 +1,13 @@
 import { Button } from "@/components/ui/button";
-import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const NotFound = () => {
+  const navigate = useNavigate();
   const handleRedirect = () => {
-    window.location.href = "/";
+    navigate("/");
   };
+
   return (
     <div className="flex justify-center items-center h-screen bg-white">
       <div className="text-center">
