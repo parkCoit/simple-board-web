@@ -1,5 +1,7 @@
+// eslint-disable-next-line no-undef
 const CracoAlias = require("craco-alias");
 
+// eslint-disable-next-line no-undef
 module.exports = {
   plugins: [
     {
