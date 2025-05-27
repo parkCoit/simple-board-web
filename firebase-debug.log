@@ -1,0 +1,60 @@
+[debug] [2024-10-05T14:44:31.297Z] ----------------------------------------------------------------------
+[debug] [2024-10-05T14:44:31.305Z] Command:       /usr/local/bin/node /opt/homebrew/bin/firebase hosting:disable --project simple-board-web
+[debug] [2024-10-05T14:44:31.306Z] CLI Version:   13.14.2
+[debug] [2024-10-05T14:44:31.306Z] Platform:      darwin
+[debug] [2024-10-05T14:44:31.306Z] Node Version:  v21.1.0
+[debug] [2024-10-05T14:44:31.306Z] Time:          Sat Oct 05 2024 23:44:31 GMT+0900 (GMT+09:00)
+[debug] [2024-10-05T14:44:31.306Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-10-05T14:44:31.357Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-10-05T14:44:31.357Z] > authorizing via signed-in user (hssslh@naver.com)
+[debug] [2024-10-05T14:44:31.357Z] [iam] checking project simple-board-web for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-10-05T14:44:31.358Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/simple-board-web:testIamPermissions [none]
+[debug] [2024-10-05T14:44:31.359Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/simple-board-web:testIamPermissions x-goog-quota-user=projects/simple-board-web
+[debug] [2024-10-05T14:44:31.359Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/simple-board-web:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-10-05T14:44:32.313Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/simple-board-web:testIamPermissions 200
+[debug] [2024-10-05T14:44:32.313Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/simple-board-web:testIamPermissions {}
+[debug] [2024-10-05T14:44:32.313Z] [iam] error while checking permissions, command may fail: FirebaseError: Authorization failed. This account is missing the following required permissions on project simple-board-web:
+
+  firebase.projects.get
+  firebasehosting.sites.update
+[debug] [2024-10-05T14:44:32.315Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/simple-board-web [none]
+[debug] [2024-10-05T14:44:32.733Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/simple-board-web 403
+[debug] [2024-10-05T14:44:32.734Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/simple-board-web {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2024-10-05T14:44:32.737Z] HTTP Error: 403, The caller does not have permission
+[debug] [2024-10-05T14:44:32.957Z] FirebaseError: HTTP Error: 403, The caller does not have permission
+    at responseToError (/opt/homebrew/lib/node_modules/firebase-tools/lib/responseToError.js:49:12)
+    at RetryOperation._fn (/opt/homebrew/lib/node_modules/firebase-tools/lib/apiv2.js:305:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: Failed to get Firebase project simple-board-web. Please make sure the project exists and your account has permission to access it.
+[debug] [2024-10-05T14:44:41.882Z] ----------------------------------------------------------------------
+[debug] [2024-10-05T14:44:41.887Z] Command:       /usr/local/bin/node /opt/homebrew/bin/firebase hosting:disable --project simple-board-server
+[debug] [2024-10-05T14:44:41.887Z] CLI Version:   13.14.2
+[debug] [2024-10-05T14:44:41.887Z] Platform:      darwin
+[debug] [2024-10-05T14:44:41.887Z] Node Version:  v21.1.0
+[debug] [2024-10-05T14:44:41.888Z] Time:          Sat Oct 05 2024 23:44:41 GMT+0900 (GMT+09:00)
+[debug] [2024-10-05T14:44:41.888Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-10-05T14:44:41.938Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-10-05T14:44:41.938Z] > authorizing via signed-in user (hssslh@naver.com)
+[debug] [2024-10-05T14:44:41.938Z] [iam] checking project simple-board-server for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-10-05T14:44:41.940Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/simple-board-server:testIamPermissions [none]
+[debug] [2024-10-05T14:44:41.940Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/simple-board-server:testIamPermissions x-goog-quota-user=projects/simple-board-server
+[debug] [2024-10-05T14:44:41.940Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/simple-board-server:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-10-05T14:44:42.915Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/simple-board-server:testIamPermissions 200
+[debug] [2024-10-05T14:44:42.915Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/simple-board-server:testIamPermissions {}
+[debug] [2024-10-05T14:44:42.915Z] [iam] error while checking permissions, command may fail: FirebaseError: Authorization failed. This account is missing the following required permissions on project simple-board-server:
+
+  firebase.projects.get
+  firebasehosting.sites.update
+[debug] [2024-10-05T14:44:42.917Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/simple-board-server [none]
+[debug] [2024-10-05T14:44:43.530Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/simple-board-server 403
+[debug] [2024-10-05T14:44:43.530Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/simple-board-server {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2024-10-05T14:44:43.533Z] HTTP Error: 403, The caller does not have permission
+[debug] [2024-10-05T14:44:43.758Z] FirebaseError: HTTP Error: 403, The caller does not have permission
+    at responseToError (/opt/homebrew/lib/node_modules/firebase-tools/lib/responseToError.js:49:12)
+    at RetryOperation._fn (/opt/homebrew/lib/node_modules/firebase-tools/lib/apiv2.js:305:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: Failed to get Firebase project simple-board-server. Please make sure the project exists and your account has permission to access it.

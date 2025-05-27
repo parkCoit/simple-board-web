@@ -4,9 +4,6 @@ import { useEffect } from "react";
 export interface NotFoundPageProps {}
 
 const NotFoundPage = (props: NotFoundPageProps) => {
-  // useEffect(() => {
-  //   window.location.replace("/error");
-  // }, []);
   return (
     <div className="p-4">
       <NotFound />

@@ -58,7 +58,7 @@ export default function Edit() {
     if (id) {
       boardUpdate({ title, content, customId: id })
         .then(() => {
-          alert("수정 완료!");
+          alert("게시글이 수정되었습니다!");
           navigate(`/`);
         })
         .catch((err) => {
