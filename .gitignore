@@ -21,6 +21,9 @@ secret.json
 .env.test.local
 .env.production.local
 
+.key
+.key.pub
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
