@@ -38,7 +38,6 @@ export function Auth() {
             sessionStorage.setItem("token", resData);
             const decodedToken = jwtDecode<CustomJwtPayload>(resData);
             console.log(decodedToken.id);
-            alert("로그인 완료");
             navigate("/");
           }
         } catch (err: any) {
